@@ -3,7 +3,6 @@ from tkinter import *
 import random
 import reduce as red
 import ReuseHackathonFunctions as reu
-import autofill as rec
 from inCouncil import *
 
 #updating listbox for matrial
