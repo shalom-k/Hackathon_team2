@@ -65,6 +65,25 @@ popularProducts[9].append("")
 
 def displayALternativesAndInfo():
     return popularProducts
+
+def returnArray(Item):
+    if (Item == "water bottle"):
+        return popular[0]
+    else if (Item == "Toilet paper"):
+        return popular[1]
+    else if (Item == "Clothing"):
+        return popular[2]
+    else if (Item == "single use plastic packaging"):
+        return popular[3]
+    else if (Item == "single use cleaning products"):
+        return popular[4]
+    else if (Item == "New things"):
+        return popular[5]
+    else if (Item == "food"):
+        return popular[6]
+    else if (Item == "tea"):
+        return popular[7]
+
 if __name__ == "__main__":
     
     print(displayALternativesAndInfo())
