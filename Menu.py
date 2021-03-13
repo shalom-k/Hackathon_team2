@@ -268,7 +268,7 @@ def setRandomFact(msg, randomFactlb):
 
 
 def getBackImage():
-    return "C:\\Users\\matth\\OneDrive\\Desktop\\Hackathon Ideas\\EcoPal\\images\\newBack.png"
+    return "newBack.png"
 
 
 def reduceFunc(menuWidgets, window):
@@ -442,15 +442,15 @@ window.config(bg='lightgreen')
 
 
 reduceImg = PhotoImage(
-    file="C:\\Users\\matth\\OneDrive\\Desktop\\Hackathon Ideas\\EcoPal\\images\\newReduce.png")
+    file="newReduce.png")
 reuseImg = PhotoImage(
-    file="C:\\Users\\matth\\OneDrive\\Desktop\\Hackathon Ideas\\EcoPal\\images\\newReuse.png")
+    file="newReuse.png")
 recycleImg = PhotoImage(
-    file="C:\\Users\\matth\\OneDrive\\Desktop\\Hackathon Ideas\\EcoPal\\images\\newRecycle.png")
+    file="newRecycle.png")
 backgroundimg = PhotoImage(
-    file="C:\\Users\\matth\\OneDrive\\Desktop\\Hackathon Ideas\\EcoPal\\images\\newBackgroundImg.png")
+    file="newBackgroundImg.png")
 ecopalImg = PhotoImage(
-    file="C:\\Users\\matth\\OneDrive\\Desktop\\Hackathon Ideas\\EcoPal\\images\\newEcoPalImage.png")
+    file="newEcoPalImage.png")
 
 backgroundLabel = Label(window, image=backgroundimg)
 ecopal = Label(window, image=ecopalImg)
