@@ -56,9 +56,8 @@ def performLookUp(council, material):
 
 if __name__ == "__main__":
     print(createWorkSheet())
-    #print(returnCouncilList())
+    print(returnCouncilList())
     print(returnMatType())
     print(returnMaterialList("Automotive"))
     print(performLookUp('Blackburn with Darwen Borough Council','Tyres'))
     print(performLookUp('Arun District Council','Asbestos'))
-    x = input()

@@ -71,11 +71,11 @@ def checkMaterial(event):
 
 
 #updating listbox for matrial
-def updateMaterialItems(dataMat):
+def updateMaterialItems(dataMatItem):
     #clear list box
     materialItemList.delete(0,END)
-    for item in dataMat:
-        materialList.insert(END,item)
+    for item in dataMatItem:
+        materialItemList.insert(END,item)
 
 #add the clicked item to list box
 def filloutMaterialItem(event):
@@ -83,9 +83,9 @@ def filloutMaterialItem(event):
     materialItemEntry.delete(0,END)
     #sets entry to item in list
     try:
-        materialItemEntry.insert(0, materialList.get(materialList.curselection()))
+        materialItemEntry.insert(0, materialItemList.get(materialItemList.curselection()))
     except:
-        materialItemEntry.insert(0, materialList.get(ACTIVE))
+        materialItemEntry.insert(0, materialItemList.get(ACTIVE))
 
 
 #checks if item in listbox  
@@ -156,7 +156,8 @@ def confirmMat():
     materialLabel.config(text =materialEntry.get())
     global materialItems
     materialItems += returnMaterialList(materialEntry.get())
-    print(materialItems)
+    #updates list box
+    updateMaterialItems(materialItems)
     materialEntry.pack_forget()
     matframe.pack_forget()
     confirmMatBtn.pack_forget()
@@ -166,6 +167,21 @@ def confirmMat():
     materialItemList.pack()
     matItemframe.pack()
     confirmMatItemBtn.pack()
+
+
+def confirmMatItem():
+    materialItemList.pack_forget()
+    materialItemLabel.config(text =materialItemEntry.get())
+    #if you can recycle or not
+    global finalCouncil
+    global finalItem
+    finalCouncil = councilLabel.cget("text")
+    finalItem = materialItemEntry.get()
+    print(performLookUp(finalCouncil, finalItem))
+    materialItemEntry.pack_forget()
+    matItemframe.pack_forget()
+    confirmMatItemBtn.pack_forget()
+
 
 #autofill for council
 #label for the council
@@ -247,7 +263,7 @@ matframe.pack_forget()
 
 
 #creating way for user to material type selection
-confirmMatBtn = Button(root, text = "ConfirmMat", command = confirmMat)
+confirmMatBtn = Button(root, text = "Confirm", command = confirmMat)
 confirmMatBtn.pack() 
 confirmMatBtn.pack_forget()
 
@@ -276,8 +292,7 @@ materialItemList.pack()
 #array of all the materials
 materialItems = []#returnMaterialList(councilLabel.get())
 
-#updates list box
-updateMaterialItems(materialItems)
+
 
 #when an item is selected from the list
 materialItemList.bind("<<ListboxSelect>>", filloutMaterialItem)
@@ -292,8 +307,12 @@ materialItemLabel.pack_forget()
 matItemframe.pack_forget()
 
 #creating way for user to material type selection
-confirmMatItemBtn = Button(root, text = "ConfirmMatITem")
+confirmMatItemBtn = Button(root, text = "Confirm", command = confirmMatItem)
 confirmMatItemBtn.pack() 
 confirmMatItemBtn.pack_forget()
 
+
+#variabls to store final result
+finalCouncil =""
+finalItem = ""
 root.mainloop()
