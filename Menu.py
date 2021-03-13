@@ -1,12 +1,14 @@
 from tkinter import *
 import random
 import reduce as red
+import ReuseHackathonFunctions as reu
 
-
+#function created for testing buttons
 def clicked1():
     print("hello")
 
 
+#uses Random to select a random fact from a load that are predefined
 def randomFact(randomFactlb):
     randint = random.randint(1,10)
     if randint == 1:
@@ -40,6 +42,7 @@ def randomFact(randomFactlb):
         setRandomFact(
             "If you don't eat a packet of crisps, someone won't die.", randomFactlb)
 
+#this function knows what the randomFactlb is, and sets it's text to a given message
 def setRandomFact(msg,randomFactlb):
    randomFactlb.config(text=msg)
 
@@ -58,7 +61,7 @@ def reduceFunc(menuWidgets,window):
         header.append(item[0])
 
     optionList = Listbox(window,width=50)
-    explainLabel = Label(window,text='Look Here')
+    explainLabel = Label(window,text='')
     
 
     def listboxFiller():
@@ -93,7 +96,7 @@ def reduceFunc(menuWidgets,window):
                         relief="solid", anchor='n', wraplength=400)
     explainLabel.pack(expand=True)
 
-    back.config(bg='black', activebackground='#009FFF')
+    back.config(bg='black', activebackground='black')
     back.pack(expand=True)
 
     reduceWidgets = [back,optionList,explainLabel]
@@ -104,14 +107,69 @@ def reuseFunc(menuWidgets, window):
     for i in range(0, len(menuWidgets)):
         menuWidgets[i].pack_forget()
 
-    backImg = PhotoImage(
-        file=getBackImage())
-    back = Button(window, image=backImg, borderwidth=0, command=lambda: revealMainMenu(menuWidgets, reuseWidgets, window))
+    totalOptions = reu.getTotalMaterials()
 
-    back.pack()
-    back.config(bg='#009FFF', activebackground='#009FFF')
+    optionList = Listbox(window, width=50)
+    explainLabel = Label(window, text='')
 
-    reuseWidgets = [back]
+    #Nearby charities:
+    def searchForCharities():
+        nearbyCharities = []
+        startLoc = postcodeEntry.get()
+        nearbyCharities = reu.locateNearbyCharities(startLoc)
+        for charity in nearbyCharities:
+            nearbyCharityList.insert(END,charity)
+        print(nearbyCharities)
+
+    postcodeExplain = Label(window,text="Enter your postcode to find nearby re-use charities: ",width = 130, font=("courier",10),borderwidth=4,relief='solid')
+
+    postcodeEntry = Entry(window,width=20,borderwidth=2,relief='raised')
+
+    postcodeSearchBtn = Button(window,text = "Search!",command = searchForCharities)
+
+    nearbyCharityList = Listbox(window,width=90)
+    nearbyCharityList.config(borderwidth=5,relief='sunken')
+
+    
+
+    def listboxFiller():
+        for item in totalOptions:
+            optionList.insert(END, item)
+
+
+    def selected(event):
+        materialToSearch = optionList.get(optionList.curselection()).lower()
+        textE = reu.displayReuseMethod(materialToSearch)
+        explainLabel.config(text=textE, anchor="n", borderwidth=4,relief="solid", wraplength=400)
+
+    listboxFiller()
+    optionList.bind("<<ListboxSelect>>", selected)
+
+    backImg = PhotoImage(file=getBackImage())
+
+    back = Button(window, image=backImg, borderwidth=0,
+                  command=lambda: revealMainMenu(menuWidgets, reduceWidgets, window))
+
+    optionList.config(borderwidth=0, relief='solid', highlightbackground='#5C5B1B',
+                      highlightcolor='#5C5B1B', highlightthickness=8, font=("courier", 10))
+    optionList.pack()
+
+    explainLabel.config(width=60, height=8, font=("System", 10), borderwidth=4,
+                        relief="solid", anchor='n', wraplength=400)
+    explainLabel.pack()
+
+    postcodeExplain.pack(expand = True)
+    postcodeEntry.pack()
+
+    postcodeSearchBtn.pack()
+
+    nearbyCharityList.pack(expand=True)
+
+    back.config(bg='black', activebackground='black')
+    back.pack(expand = True)
+
+
+    reduceWidgets = [back, optionList, explainLabel,postcodeEntry,postcodeExplain,postcodeSearchBtn,nearbyCharityList]
     window.mainloop()
 
 
@@ -124,7 +182,7 @@ def recycleFunc(menuWidgets, window):
     back = Button(window, image=backImg, borderwidth=0, command=lambda: revealMainMenu(menuWidgets, recycleWidgets, window))
 
     back.pack()
-    back.config(bg='#009FFF', activebackground='#009FFF')
+    back.config(bg='black', activebackground='black')
 
     recycleWidgets = [back]
     window.mainloop()
