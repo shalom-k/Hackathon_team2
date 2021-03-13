@@ -67,12 +67,11 @@ def locateNearbyCharities():
     
     for i in range(len(x)):
         charitylist.append(x[i]['name'])
-
-    #print(charitylist)
+    
     start = input("Enter Your Postcode : ")
-
-    for l in range(len(charitylist)):
-            dlist.append(counc.distance(start,charitylist[l]))
+    for l in range(len(x)):
+            fin = x[l]['formatted_address']
+            dlist.append(str(counc.distance(start,fin)))
     for item in dlist:
         print(item)
  
