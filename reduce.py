@@ -49,15 +49,7 @@ popularProducts[7].append("Tea")
 popularProducts[7].append("Try drinking loose leaf tea!")
 popularProducts[7].append("Plastic accounts for roughly 25% of the teabag. By switching to loose leaf, you will reduce the amount of plastic ending up in landfills.")
 
-#popularProducts.append([])
-#popularProducts[8].append("")
-#popularProducts[8].append("")
-#popularProducts[8].append("")
 
-#popularProducts.append([])
-#popularProducts[9].append("")
-#popularProducts[9].append("")
-#popularProducts[9].append("")
 
 #returns the array
 

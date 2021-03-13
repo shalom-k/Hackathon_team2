@@ -199,6 +199,24 @@ def confirmMatItem():
 
     if(performLookUp(finalCouncil, finalItem)):
         resultLbl.pack()
+    else:
+        findNearbyRCs()
+
+def findNearbyRCs():
+    noResultLbl.pack()
+    noResultPCEntry.pack()
+    noResultSearchBtn.pack()
+    nearbyRCs.pack()
+
+    nearbyRCs.delete(0, END)
+    nearbyRCList = []
+    startLocNew = noResultPCEntry.get()
+    nearbyRCList = reu.locateNearbyRCs(startLocNew)
+    for rc in nearbyRCList:
+        nearbyRCs.insert(END, rc)
+    print(nearbyRCList)
+
+
 
 #function created for testing buttons
 
@@ -386,8 +404,7 @@ def recycleFunc(menuWidgets, window):
         menuWidgets[i].pack_forget()
 
     backImg = PhotoImage(file=getBackImage())
-    back = Button(window, image=backImg, borderwidth=0, command=lambda: revealMainMenu(
-        menuWidgets, recycleWidgets, window))
+    back = Button(window, image=backImg, borderwidth=0, command=lambda: revealMainMenu(menuWidgets, recycleWidgets, window))
 
     back.pack(padx=40)
 
@@ -400,7 +417,7 @@ def recycleFunc(menuWidgets, window):
     back.config(bg='black', activebackground='black')
 
     recycleWidgets = [back, councilLabel, councilEntry, myframe, councilList, confirmBtn,
-                      materialLabel, materialEntry, matframe, materialList, confirmMatBtn, materialItemLabel]
+                      materialLabel, materialEntry, matframe, materialList, confirmMatBtn, materialItemLabel,resultLbl,noResultLbl,noResultPCEntry,noResultSearchBtn,nearbyRCs]
     window.mainloop()
 
 
@@ -514,6 +531,17 @@ materials = returnMatType()
 resultLbl = Label(window, text="Your local council accepts this item!")
 resultLbl.config(font=("courier", 11))
 
+noResultLbl = Label(window,text="Your council does not accept this item. Enter you postcode to find nearby centres:")
+noResultLbl.config(font=("courier", 8))
+
+noResultPCEntry = Entry(window)
+noResultPCEntry.config( width=20, borderwidth=2, relief='raised')
+
+noResultSearchBtn = Button(window,text = "Search!",command = findNearbyRCs)
+
+nearbyRCs = Listbox(window, width = 90)
+nearbyRCs.config(borderwidth=5, relief='sunken')
+
 #updates list box
 updateMaterial(materials)
 
@@ -553,7 +581,13 @@ myframe.pack()
 councilList.pack()
 confirmBtn.pack()
 materialLabel.pack()
+
 resultLbl.pack()
+noResultLbl.pack()
+noResultPCEntry.pack()
+noResultSearchBtn.pack()
+nearbyRCs.pack()
+
 materialEntry.pack()
 matframe.pack()
 materialList.pack()
@@ -571,6 +605,11 @@ myframe.pack_forget()
 councilList.pack_forget()
 confirmBtn.pack_forget()
 resultLbl.pack_forget()
+noResultLbl.pack_forget()
+noResultPCEntry.pack_forget()
+noResultSearchBtn.pack_forget()
+nearbyRCs.pack_forget()
+
 
 #remove unneeded widgets
 materialLabel.pack_forget()

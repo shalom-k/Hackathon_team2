@@ -85,6 +85,30 @@ def locateNearbyCharities(start):
       new_arr.append(charitylist[i]+dlist[i])
 
     return new_arr
+
+def locateNearbyRCs(start):
+    place = ("Recycling Centres near " + start)
+
+    charities = ""
+
+    x = counc.nearby_locations(place)
+    RClist = []
+    dlist = []
+
+    for i in range(len(x)):
+        RClist.append(x[i]['name'])
+
+    for l in range(len(x)):
+        fin = x[l]['formatted_address']
+        dlist.append(str(counc.distance(start, fin)))
+    for item in dlist:
+        print(item)
+
+    new_arr = []
+    for i in range(len(RClist)):
+      new_arr.append(RClist[i]+dlist[i])
+
+    return new_arr
     
 
 
