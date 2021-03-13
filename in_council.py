@@ -17,7 +17,7 @@ def returnCouncilList():
 def returnMaterialList():
     worksheet = createWorkSheet()
     materials = []
-    for c in range(2, worksheet.max_coloumn + 1):
+    for c in range(2, worksheet.max_column + 1):
         materialItem = worksheet.cell(row = 1, column = c).value
         materials.append(materialItem)
     return materials
@@ -36,14 +36,13 @@ def performLookUp(council, material):
                     break;
             break;
     return gotIt
-    
-            
-    
+
 
 
 if __name__ == "__main__":
     print(createWorkSheet())
     print(returnCouncilList())
+    print(returnMaterialList())
     print(performLookUp('Blackburn with Darwen Borough Council','Tyres'))
     print(performLookUp('Arun District Council','Asbestos'))
 
